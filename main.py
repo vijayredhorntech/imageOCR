@@ -3,6 +3,7 @@ from fastapi.responses import JSONResponse
 import easyocr
 import cv2
 import numpy as np
+import os
 
 app = FastAPI()
 
@@ -28,4 +29,6 @@ async def perform_ocr(file: UploadFile = File(...)):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # Get the port from the environment variable or default to 8000
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
